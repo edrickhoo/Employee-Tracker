@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,11 +50,12 @@ public class EmployeeController {
 	}
 	
 	@CrossOrigin
-	@PostMapping("/update/{id}")
+	@PutMapping("/update/{id}")
 	public ResponseEntity<Employee> update(@RequestBody @Valid EmployeeDTO data, @PathVariable Long id) {
 		Optional<Employee> maybeEmployee = this.service.getById(id);
 		if(maybeEmployee.isEmpty()) {
-			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+			Employee createdEmployee = this.service.create(data);
+			return new ResponseEntity<>(createdEmployee, HttpStatus.CREATED);
 		}
 		
 		Employee updatedEmployee = this.service.update(data, id);

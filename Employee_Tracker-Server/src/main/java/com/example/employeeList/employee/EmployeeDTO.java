@@ -1,55 +1,57 @@
 package com.example.employeeList.employee;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 public class EmployeeDTO {
 
-	@NotNull
+	@NotBlank
 	private String firstName;
 	
 	private String middleName;
 	
-	@NotNull
+	@NotBlank
 	private String lastName;
 	
-	@NotNull
+	@NotBlank
 	private String email;
 	
-	@NotNull
+	@NotBlank
 	private String phone;
 	
-	@NotNull
+	@NotBlank
 	private String address;
 	
-	@NotNull
+	@NotBlank
 	private String contract;
 
-	@NotNull
+	@NotBlank
 	private String startDateDay;
 	
-	@NotNull
+	@NotBlank
 	private String startDateMonth;
 	
-	@NotNull
+	@NotBlank
 	private String startDateYear;
 	
-	@NotNull
+	@NotBlank
 	private String endDateDay;
 
-	@NotNull
+	@NotBlank
 	private String endDateMonth;
 	
-	@NotNull
+	@NotBlank
 	private String endDateYear;
 	
 	@NotNull
 	private boolean onGoing;
 	
-	@NotNull
+	@NotBlank
 	private String basis;
 	
 	@NotNull
 	private int hoursPerWeek;
+	
 	public EmployeeDTO (String firstName,  String middleName, String lastName, String email,String phone, String address, String contract, String startDateDay, String startDateMonth, String startDateYear,String endDateDay,String endDateMonth,String endDateYear, boolean onGoing, String basis, int hoursPerWeek) {
 		this.firstName = firstName;
 		this.middleName = middleName;

@@ -1,27 +1,7 @@
 import axios from "axios";
-import { FormInput } from "../containers/EmployeeAdd/EmployeeAdd";
+import { EmployeeApiData, FormInput } from "../interfaces/interfaces";
 
 const BASE_URL = "http://localhost:8080/employees/";
-
-export interface EmployeeApiData {
-  id: number;
-  firstName: string;
-  middleName: string;
-  lastName: string;
-  email: string;
-  phone: number;
-  address: string;
-  contract: string;
-  startDateDay: string;
-  startDateMonth: string;
-  startDateYear: string;
-  endDateDay: string;
-  endDateMonth: string;
-  endDateYear: string;
-  onGoing: boolean;
-  basis: string;
-  hoursPerWeek: string;
-}
 
 export const fetchEmployees = async (): Promise<EmployeeApiData[]> => {
   const data = await axios.get(BASE_URL);
@@ -44,7 +24,7 @@ export const fetchEmployeeById = async (id: number) => {
 };
 
 export const updateEmployee = async (data: FormInput, id: number) => {
-  const response = await axios.post(BASE_URL + `update/${id}`, data, {
+  const response = await axios.put(BASE_URL + `update/${id}`, data, {
     headers: {
       "Content-Type": "application/json",
     },

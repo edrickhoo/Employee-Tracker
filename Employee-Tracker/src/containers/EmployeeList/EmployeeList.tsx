@@ -1,17 +1,15 @@
 import EmployeeCard from "../../components/EmployeeCard/EmployeeCard";
 import { Link } from "react-router-dom";
-import {
-  fetchEmployees,
-  EmployeeApiData,
-  removeEmployeeById,
-} from "../../api/api";
+import { fetchEmployees, removeEmployeeById } from "../../api/api";
 import { useMutation, useQuery, useQueryClient } from "react-query";
+import { EmployeeApiData } from "../../interfaces/interfaces";
 
 const EmployeeList = () => {
   const queryClient = useQueryClient();
   const { isLoading, error, data } = useQuery("employeesData", () =>
     fetchEmployees()
   );
+  console.log(data ? data[0] : null);
 
   const removeEmployeeMutation = useMutation(removeEmployeeById, {
     onSuccess: (data, id) => {
@@ -71,7 +69,7 @@ const EmployeeList = () => {
             to="/employee/add"
             className="rounded-md text-white py-2 px-8 bg-blue-800"
           >
-            Add Employee
+            Add <span className="hidden md:inline">Employee</span>
           </Link>
         </div>
         {data

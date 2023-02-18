@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { EmployeeApiData } from "../../api/api";
+import { convMonthToNum } from "../../helper/validationHelper/validationHelper";
+import { EmployeeApiData } from "../../interfaces/interfaces";
 
 interface Props {
   employee: EmployeeApiData;
@@ -7,6 +8,38 @@ interface Props {
 }
 
 const EmployeeCard = ({ employee, removeEmployee }: Props) => {
+  const timeWithCompany = (
+    startMonth: string,
+    startYear: string,
+    endMonth: string,
+    endYear: string
+  ): string => {
+    const convStartMonth = convMonthToNum(startMonth);
+    const convEndMonth = convMonthToNum(endMonth);
+    let total = "";
+    if (startYear === endYear) {
+      total += convEndMonth - convStartMonth;
+      if (total == "1") {
+        total += " month";
+      } else {
+        total += " months";
+      }
+      return total;
+    }
+    total += Number(endYear) - Number(startYear);
+    if (total == "1") {
+      total += " yr";
+    } else {
+      total += " yrs";
+    }
+
+    return total;
+  };
+
+  console.log(
+    convMonthToNum(employee.endDateMonth) -
+      convMonthToNum(employee.startDateMonth)
+  );
   return (
     <div className="flex justify-between py-4 border-b boder-gray-400">
       <div>
@@ -15,13 +48,12 @@ const EmployeeCard = ({ employee, removeEmployee }: Props) => {
         </p>
         <p>
           {employee.contract} -{" "}
-          {employee.endDateYear !== employee.startDateYear
-            ? Number(employee.endDateYear) -
-              Number(employee.startDateYear) +
-              " yrs"
-            : Number(employee.endDateMonth) -
-              Number(employee.startDateMonth) +
-              " months"}
+          {timeWithCompany(
+            employee.startDateMonth,
+            employee.startDateYear,
+            employee.endDateMonth,
+            employee.endDateYear
+          )}
         </p>
         <p>{employee.email}</p>
       </div>

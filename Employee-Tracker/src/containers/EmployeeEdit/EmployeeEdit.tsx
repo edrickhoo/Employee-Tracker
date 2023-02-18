@@ -2,7 +2,11 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { fetchEmployeeById, updateEmployee } from "../../api/api";
 import { useParams, useNavigate } from "react-router-dom";
-import { FormInput } from "../EmployeeAdd/EmployeeAdd";
+import { FormInput } from "../../interfaces/interfaces";
+import {
+  canBeOnGoingHelper,
+  isValidEndDateHelper,
+} from "../../helper/validationHelper/validationHelper";
 
 const EmployeeEdit = () => {
   const { id } = useParams();
@@ -26,22 +30,55 @@ const EmployeeEdit = () => {
       console.log(e);
     }
   };
+
+  const isValidEndDate = () => {
+    const startDay = getValues().startDateDay;
+    const startMonth = getValues().startDateMonth;
+    const startYear = getValues().startDateYear;
+    const endDay = getValues().endDateDay;
+    const endMonth = getValues().endDateMonth;
+    const endYear = getValues().endDateYear;
+
+    return isValidEndDateHelper(
+      startDay,
+      startMonth,
+      startYear,
+      endDay,
+      endMonth,
+      endYear
+    );
+  };
+
+  const canBeOnGoing = (value: boolean): boolean => {
+    if (value === false) {
+      return true;
+    }
+    const endDateDay = getValues().endDateDay;
+    const endDateMonth = getValues().endDateMonth;
+    const endDateYear = getValues().endDateYear;
+
+    return canBeOnGoingHelper({ endDateDay, endDateMonth, endDateYear });
+  };
+
   return (
     <div>
       <div>
-        <div className="bg-gray-200 py-16">
+        <div className="bg-gray-200 py-16 flex flex-col items-center md:block">
           <Link
             to="/"
-            className="underline block hover:text-gray-300 text-gray-600 max-w-[1280px] w-full mx-auto px-4 mb-4"
+            className="underline block hover:text-gray-500 text-gray-600 max-w-[1280px] w-full mx-auto px-4 mb-4 text-lg font-semibold"
           >
             &lt; Back
           </Link>
           <h2 className="text-3xl font-bold max-w-[1280px] mx-auto px-4">
-            Employee details
+            Employee Details
           </h2>
         </div>
         <div className="max-w-[1280px] mx-auto px-4 py-8">
-          <form className="space-y-8" onSubmit={handleSubmit(onSubmit)}>
+          <form
+            className="space-y-8 flex flex-col items-center md:block"
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <section className="flex flex-col space-y-2">
               <h5 className="font-bold text-2xl">Personal information</h5>
               <label>First name</label>
@@ -88,7 +125,7 @@ const EmployeeEdit = () => {
                 })}
                 name="email"
                 className="border-gray-500 border-2 rounded w-[300px] px-2 py-1"
-                type="text"
+                type="email"
               />
               {errors?.email?.type === "required" && (
                 <p className="text-red-600">This field is required</p>
@@ -118,7 +155,7 @@ const EmployeeEdit = () => {
               )}
 
               <div>
-                <label>Residential address</label>
+                <label htmlFor="address">Residential address</label>
                 <div className="text-sm text-gray-400">
                   Start typing to search
                 </div>
@@ -128,8 +165,9 @@ const EmployeeEdit = () => {
                 {...register("address", {
                   required: true,
                 })}
+                name="address"
                 type="text"
-                className="border-gray-500 border-2 rounded max-w-[600px] px-2 py-1"
+                className="border-gray-500 border-2 rounded min-w-[300px] max-w-[600px] px-2 py-1"
               />
               {errors?.address?.type === "required" && (
                 <p className="text-red-600">This field is required</p>
@@ -145,6 +183,7 @@ const EmployeeEdit = () => {
                     className="scale-150 mr-2"
                     type="radio"
                     value="Permanent"
+                    defaultChecked
                   />
                   <label>Permanent</label>
                 </div>
@@ -184,7 +223,7 @@ const EmployeeEdit = () => {
                     {...register("startDateMonth", {
                       required: true,
                     })}
-                    className="border-gray-500 border-2 rounded px-2 py-1"
+                    className="border-gray-500 border-2 rounded px-2 py-1 h-[36px]"
                     id="startMonth"
                   >
                     <option value="January">January</option>
@@ -244,8 +283,8 @@ const EmployeeEdit = () => {
                       required: true,
                     })}
                     className="border-gray-500 border-2 rounded px-2 py-1"
-                    name="end-month"
-                    id="startMonth"
+                    name="endDateMonth"
+                    id="endDateMonth"
                   >
                     <option value="January">January</option>
                     <option value="February">February</option>
@@ -267,8 +306,8 @@ const EmployeeEdit = () => {
                   </label>
                   <input
                     {...register("endDateYear", {
-                      min: getValues().startDateYear,
                       required: true,
+                      validate: isValidEndDate,
                     })}
                     className="border-gray-500 border-2 rounded px-2 py-1"
                     name="endDateYear"
@@ -277,6 +316,7 @@ const EmployeeEdit = () => {
                   {errors?.endDateYear?.type === "required" && (
                     <p className="text-red-600">Field required</p>
                   )}
+
                   {errors?.endDateYear?.type === "min" && (
                     <p className="text-red-600">
                       Must be greater than{" "}
@@ -285,14 +325,27 @@ const EmployeeEdit = () => {
                   )}
                 </div>
               </div>
-              <div className="pl-2 pb-4 py-2">
+              {errors?.endDateYear?.type === "validate" && (
+                <p className="text-red-600">
+                  End Day cannot be earlier than start date
+                </p>
+              )}
+              <div className="pl-2 pb-4 py-2 ">
                 <input
-                  {...register("onGoing")}
+                  {...register("onGoing", {
+                    validate: canBeOnGoing,
+                  })}
                   className="scale-[200%] mr-4 rounded-none"
                   type="checkbox"
                 />
-                <label>On goining</label>
+                <label>On goining</label>{" "}
+                {errors?.onGoing?.type === "validate" && (
+                  <p className="text-red-600 inline ml-3">
+                    End date passed cannot be on going
+                  </p>
+                )}
               </div>
+
               <div className="space-y-2">
                 <span className="font-semibold">
                   Is this on a ful-time or part-time basis?
@@ -304,7 +357,9 @@ const EmployeeEdit = () => {
                     name="basis"
                     type="radio"
                     value="Full-time"
+                    defaultChecked
                   />
+
                   <label>Full-time</label>
                 </div>
                 <div>
@@ -337,13 +392,13 @@ const EmployeeEdit = () => {
               </div>
             </section>
 
-            <button className="text-white border-2 border-blue-700 bg-blue-700 px-16 py-2 mr-4 rounded-md">
-              Save
+            <button className="text-white border-2 border-blue-700 bg-blue-700 hover:bg-blue-600 px-14 py-2 md:mr-4 rounded-md">
+              Update
             </button>
             <button>
               <Link
                 to="/"
-                className="bg-gray-300 border-2 border-gray-500 px-14 py-2 rounded-md"
+                className="bg-gray-300 border-2 border-gray-500 hover:bg-gray-200 px-14 py-2 rounded-md"
               >
                 Cancel
               </Link>

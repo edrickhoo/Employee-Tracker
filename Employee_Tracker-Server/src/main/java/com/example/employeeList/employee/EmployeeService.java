@@ -5,34 +5,36 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 @Transactional
+@AllArgsConstructor
 public class EmployeeService {
 
 @Autowired
-private EmployeeRepository repository;
+private EmployeeRepository employeeRepository;
 
 
 public Employee create(EmployeeDTO data) {
 	Employee newEmployee = new Employee(data.getFirstName(), data.getMiddleName(), data.getLastName(), data.getEmail(), data.getPhone(), data.getAddress(), data.getContract(), data.getStartDateDay(), data.getStartDateMonth(), data.getStartDateYear(), data.getEndDateDay(), data.getEndDateMonth(), data.getEndDateYear(), data.isOnGoing(), data.getBasis(), data.getHoursPerWeek());
-	this.repository.save(newEmployee);
+	this.employeeRepository.save(newEmployee);
 	
 	return newEmployee;
 }
 
 
 public List<Employee> getAll() {
-	List<Employee> allEmployees = this.repository.findAll();
+	List<Employee> allEmployees = this.employeeRepository.findAll();
 	
 	return allEmployees;
 }
 
 
 public Optional<Employee> getById(Long id) {
-		Optional<Employee> maybeEmployee = this.repository.findById(id);
+		Optional<Employee> maybeEmployee = this.employeeRepository.findById(id);
 		
 		return maybeEmployee;
 	
@@ -40,7 +42,7 @@ public Optional<Employee> getById(Long id) {
 
 
 public Employee update(EmployeeDTO data, Long id) {
-	Optional<Employee> maybeEmployee = this.repository.findById(id);
+	Optional<Employee> maybeEmployee = this.employeeRepository.findById(id);
 	Employee foundEmployee = maybeEmployee.get();
 	foundEmployee.setFirstName(data.getFirstName());
 	foundEmployee.setMiddleName(data.getMiddleName());
@@ -58,20 +60,18 @@ public Employee update(EmployeeDTO data, Long id) {
 	foundEmployee.setStartDateYear(data.getStartDateYear());
 	foundEmployee.setOnGoing(data.isOnGoing());
 	foundEmployee.setContract(data.getContract());
-	
-	return this.repository.save(foundEmployee);
-	
+
+	return this.employeeRepository.save(foundEmployee);
+
 }
 
 
 public boolean delete(Long id) {
-	Optional<Employee> maybeEmployee = this.repository.findById(id);
-	
-	if(maybeEmployee.isEmpty()) {
+	if(!employeeRepository.existsById(id)) {
 		return false;
 	}
 	
-	this.repository.deleteById(id);
+	this.employeeRepository.deleteById(id);
 	
 	return true;
 	
