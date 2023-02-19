@@ -33,8 +33,8 @@ describe("EmployeeList Component Tests", () => {
     expect(await screen.findByText("Sam")).toBeInTheDocument();
     expect(await screen.findByText("Jeffrey")).toBeInTheDocument();
     expect(await screen.findByText("test@hotmail.com")).toBeInTheDocument();
-    const btn = screen.queryAllByRole("button");
-    expect(btn.length).toBe(axiosResponse.data.length);
+    const removeBtn = screen.queryAllByRole("button");
+    expect(removeBtn.length).toBe(axiosResponse.data.length);
   });
 
   it("should render page title and description", async () => {

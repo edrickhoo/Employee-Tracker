@@ -33,7 +33,7 @@ class EmployeeServiceTest {
     @Test
     void create() {
         // given
-        EmployeeDTO employeeDTO = new EmployeeDTO(  "Frank", "bob", "test", "test@hotmail.com", "test", "test", "test", "test", "test", "test", "test", "test", "test", true, "test", 33
+        EmployeeDTO employeeDTO = new EmployeeDTO(  "Frank", "bob", "test", "test@hotmail.com", "test", "test", "test", 15, "test", 2015, 15, "test", 2016, true, "test", 33
         );
 
         // when
@@ -72,9 +72,9 @@ class EmployeeServiceTest {
     @Test
     void update() {
         // given
-        EmployeeDTO employeeDTO = new EmployeeDTO(  "NewName", "NewMiddle", "SameLast", "new@hotmail.com", "0412345678", "25 Peter St", "Permanent", "25", "March", "2013", "17", "July", "2015", false, "Full-time", 33
+        EmployeeDTO employeeDTO = new EmployeeDTO(  "NewName", "NewMiddle", "SameLast", "new@hotmail.com", "0412345678", "25 Peter St", "Permanent", 25, "March", 2013, 17, "July", 2015, false, "Full-time", 33
         );
-        Employee employee = new Employee( "Franka", "bob", "SameLast", "test@hotmail.com", "0412345678", "25 Peter St", "Permanent", "25", "March", "2013", "17", "July", "2015", false, "Full-time", 33
+        Employee employee = new Employee( "Franka", "bob", "SameLast", "test@hotmail.com", "0412345678", "25 Peter St", "Permanent", 25, "March", 2013, 17, "July", 2015, false, "Full-time", 33
         );
         employee.setId(1L);
         long id = 1;

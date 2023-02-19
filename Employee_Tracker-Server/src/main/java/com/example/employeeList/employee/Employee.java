@@ -36,22 +36,22 @@ public class Employee {
 	private String contract;
 
 	@Column
-	private String startDateDay;
+	private Integer startDateDay;
 	
 	@Column
 	private String startDateMonth;
 	
 	@Column
-	private String startDateYear;
+	private Integer startDateYear;
 	
 	@Column
-	private String endDateDay;
+	private Integer endDateDay;
 
 	@Column
 	private String endDateMonth;
 	
 	@Column
-	private String endDateYear;
+	private Integer endDateYear;
 	
 	@Column
 	private boolean onGoing;
@@ -60,13 +60,13 @@ public class Employee {
 	private String basis;
 	
 	@Column
-	private int hoursPerWeek;
+	private Integer hoursPerWeek;
 	
 	public Employee() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Employee(String firstName,  String middleName, String lastName, String email,String phone, String address, String contract, String startDateDay, String startDateMonth, String startDateYear,String endDateDay,String endDateMonth,String endDateYear, boolean onGoing, String basis, int hoursPerWeek) {
+	public Employee(String firstName,  String middleName, String lastName, String email,String phone, String address, String contract, Integer startDateDay, String startDateMonth, Integer startDateYear,Integer endDateDay,String endDateMonth,Integer endDateYear, boolean onGoing, String basis, Integer hoursPerWeek) {
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
@@ -83,30 +83,6 @@ public class Employee {
 		this.onGoing = onGoing;
 		this.basis = basis;
 		this.hoursPerWeek = hoursPerWeek;
-	}
-
-	public String getEndDateDay() {
-		return endDateDay;
-	}
-
-	public void setEndDateDay(String endDateDay) {
-		this.endDateDay = endDateDay;
-	}
-
-	public String getEndDateMonth() {
-		return endDateMonth;
-	}
-
-	public void setEndDateMonth(String endDateMonth) {
-		this.endDateMonth = endDateMonth;
-	}
-
-	public String getEndDateYear() {
-		return endDateYear;
-	}
-
-	public void setEndDateYear(String endDateYear) {
-		this.endDateYear = endDateYear;
 	}
 
 	public Long getId() {
@@ -173,11 +149,11 @@ public class Employee {
 		this.contract = contract;
 	}
 
-	public String getStartDateDay() {
+	public Integer getStartDateDay() {
 		return startDateDay;
 	}
 
-	public void setStartDateDay(String startDateDay) {
+	public void setStartDateDay(Integer startDateDay) {
 		this.startDateDay = startDateDay;
 	}
 
@@ -189,12 +165,36 @@ public class Employee {
 		this.startDateMonth = startDateMonth;
 	}
 
-	public String getStartDateYear() {
+	public Integer getStartDateYear() {
 		return startDateYear;
 	}
 
-	public void setStartDateYear(String startDateYear) {
+	public void setStartDateYear(Integer startDateYear) {
 		this.startDateYear = startDateYear;
+	}
+
+	public Integer getEndDateDay() {
+		return endDateDay;
+	}
+
+	public void setEndDateDay(Integer endDateDay) {
+		this.endDateDay = endDateDay;
+	}
+
+	public String getEndDateMonth() {
+		return endDateMonth;
+	}
+
+	public void setEndDateMonth(String endDateMonth) {
+		this.endDateMonth = endDateMonth;
+	}
+
+	public Integer getEndDateYear() {
+		return endDateYear;
+	}
+
+	public void setEndDateYear(Integer endDateYear) {
+		this.endDateYear = endDateYear;
 	}
 
 	public boolean isOnGoing() {
@@ -213,13 +213,11 @@ public class Employee {
 		this.basis = basis;
 	}
 
-	public int getHoursPerWeek() {
+	public Integer getHoursPerWeek() {
 		return hoursPerWeek;
 	}
 
-	public void setHoursPerWeek(int hoursPerWeek) {
+	public void setHoursPerWeek(Integer hoursPerWeek) {
 		this.hoursPerWeek = hoursPerWeek;
 	}
-	
-
 }

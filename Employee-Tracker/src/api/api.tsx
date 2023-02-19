@@ -29,7 +29,6 @@ export const updateEmployee = async (data: FormInput, id: number) => {
       "Content-Type": "application/json",
     },
   });
-  console.log({ response });
   return response;
 };
 

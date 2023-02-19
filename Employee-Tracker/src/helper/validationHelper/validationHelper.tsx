@@ -13,7 +13,7 @@ interface monthToNumber {
   December: number;
 }
 
-export const monthToNumber: monthToNumber = {
+const monthToNumber: monthToNumber = {
   January: 1,
   February: 2,
   March: 3,
@@ -37,9 +37,9 @@ export const canBeOnGoingHelper = ({
   endDateMonth,
   endDateYear,
 }: {
-  endDateDay: string;
+  endDateDay: number;
   endDateMonth: string;
-  endDateYear: string;
+  endDateYear: number;
 }): boolean => {
   const date = new Date();
 
@@ -69,12 +69,12 @@ export const canBeOnGoingHelper = ({
 };
 
 export const isValidEndDateHelper = (
-  startDay: string,
+  startDay: number,
   startMonth: string,
-  startYear: string,
-  endDay: string,
+  startYear: number,
+  endDay: number,
   endMonth: string,
-  endYear: string
+  endYear: number
 ): boolean => {
   const covStartMonth = monthToNumber[startMonth as keyof monthToNumber];
   const covEndMonth = monthToNumber[endMonth as keyof monthToNumber];

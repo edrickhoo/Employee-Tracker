@@ -34,27 +34,6 @@ const EmployeeList = () => {
     removeEmployeeMutation.mutate(id);
   };
 
-  const removeEmployee = async (id: number) => {
-    try {
-      await removeEmployeeById(id);
-      // await fetchEmployeWrapper();
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  // const fetchEmployeWrapper = async () => {
-  //   try {
-  //     const data = await fetchEmployees();
-  //     setEmployees(data);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchEmployeWrapper();
-  // }, []);
   return (
     <div>
       <div className="bg-gray-200 py-16">

@@ -10,9 +10,9 @@ interface Props {
 const EmployeeCard = ({ employee, removeEmployee }: Props) => {
   const timeWithCompany = (
     startMonth: string,
-    startYear: string,
+    startYear: number,
     endMonth: string,
-    endYear: string
+    endYear: number
   ): string => {
     const convStartMonth = convMonthToNum(startMonth);
     const convEndMonth = convMonthToNum(endMonth);
@@ -26,8 +26,8 @@ const EmployeeCard = ({ employee, removeEmployee }: Props) => {
       }
       return total;
     }
-    total += Number(endYear) - Number(startYear);
-    if (total == "1") {
+    total += endYear - startYear;
+    if (total === "1") {
       total += " yr";
     } else {
       total += " yrs";

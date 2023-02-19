@@ -27,7 +27,7 @@ const EmployeeAdd = () => {
     }
   };
 
-  const isValidEndDate = (endDateYear: string) => {
+  const isValidEndDate = (endDateYear: number) => {
     const startDay = getValues().startDateDay;
     const startMonth = getValues().startDateMonth;
     const startYear = getValues().startDateYear;
@@ -76,20 +76,26 @@ const EmployeeAdd = () => {
           >
             <section className="flex flex-col space-y-2">
               <h5 className="font-bold text-2xl">Personal information</h5>
-              <label>First name</label>
+              <label htmlFor="firstName">First name</label>
               <input
+                data-testid="firstName"
                 {...register("firstName", {
                   required: true,
                   pattern: /^[A-Za-z]+$/i,
                 })}
+                name="firstName"
                 className="border-gray-500 border-2 rounded w-[300px] px-2 py-1"
                 type="text"
               />
               {errors?.firstName?.type === "required" && (
                 <p className="text-red-600">This field is required</p>
               )}
+              {errors?.firstName?.type === "pattern" && (
+                <p className="text-red-600">Alphabetic characters only</p>
+              )}
               <label>Middle name (if applicable)</label>
               <input
+                data-testid="middleName"
                 {...register("middleName", {
                   pattern: /^[A-Za-z]+$/i,
                 })}
@@ -97,8 +103,12 @@ const EmployeeAdd = () => {
                 className="border-gray-500 border-2 rounded w-[300px] px-2 py-1"
                 type="text"
               />
+              {errors?.middleName?.type === "pattern" && (
+                <p className="text-red-600">Alphabetic characters only </p>
+              )}
               <label>Last name</label>
               <input
+                data-testid="lastName"
                 {...register("lastName", {
                   required: true,
                 })}
@@ -109,11 +119,15 @@ const EmployeeAdd = () => {
               {errors?.lastName?.type === "required" && (
                 <p className="text-red-600">This field is required</p>
               )}
+              {errors?.lastName?.type === "pattern" && (
+                <p className="text-red-600">Alphabetic characters only </p>
+              )}
             </section>
             <section className="flex flex-col space-y-2">
               <h5 className="font-bold text-2xl">Contact details</h5>
               <label>Email address</label>
               <input
+                data-testid="email"
                 {...register("email", {
                   required: true,
                   pattern: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
@@ -126,7 +140,7 @@ const EmployeeAdd = () => {
                 <p className="text-red-600">This field is required</p>
               )}
               <div>
-                <label>Mobile number</label>
+                <label htmlFor="phone">Mobile number</label>
                 <div className="text-sm text-gray-400">
                   Must be an Australian number
                 </div>
@@ -137,6 +151,7 @@ const EmployeeAdd = () => {
                   +61
                 </span>
                 <input
+                  data-testid="phone"
                   {...register("phone", {
                     required: true,
                   })}
@@ -157,6 +172,7 @@ const EmployeeAdd = () => {
               </div>
 
               <input
+                data-testid="address"
                 {...register("address", {
                   required: true,
                 })}
@@ -174,6 +190,7 @@ const EmployeeAdd = () => {
                 <span className="font-semibold">What is contract type?</span>
                 <div>
                   <input
+                    data-testid="contractpPermanent"
                     {...register("contract")}
                     className="scale-150 mr-2"
                     type="radio"
@@ -184,6 +201,7 @@ const EmployeeAdd = () => {
                 </div>
                 <div>
                   <input
+                    data-testid="contractContract"
                     {...register("contract")}
                     className="scale-150 mr-2"
                     type="radio"
@@ -199,6 +217,7 @@ const EmployeeAdd = () => {
                     Day
                   </label>
                   <input
+                    data-testid="startDateDay"
                     {...register("startDateDay", {
                       required: true,
                       max: 32,
@@ -215,6 +234,7 @@ const EmployeeAdd = () => {
                     Month
                   </label>
                   <select
+                    data-testid="startDateMonth"
                     {...register("startDateMonth", {
                       required: true,
                     })}
@@ -238,6 +258,7 @@ const EmployeeAdd = () => {
                 <div className="flex flex-col max-w-[70px]">
                   <label className="font-semibold">Year</label>
                   <input
+                    data-testid="startDateYear"
                     {...register("startDateYear", {
                       required: true,
                       min: 0,
@@ -257,6 +278,7 @@ const EmployeeAdd = () => {
                     Day
                   </label>
                   <input
+                    data-testid="endDateDay"
                     {...register("endDateDay", {
                       required: true,
                       max: 32,
@@ -274,6 +296,7 @@ const EmployeeAdd = () => {
                     Month
                   </label>
                   <select
+                    data-testid="endDateMonth"
                     {...register("endDateMonth", {
                       required: true,
                     })}
@@ -300,6 +323,7 @@ const EmployeeAdd = () => {
                     Year
                   </label>
                   <input
+                    data-testid="endDateYear"
                     {...register("endDateYear", {
                       required: true,
                       validate: isValidEndDate,
@@ -327,13 +351,15 @@ const EmployeeAdd = () => {
               )}
               <div className="pl-2 pb-4 py-2 ">
                 <input
+                  data-testid="onGoing"
                   {...register("onGoing", {
                     validate: canBeOnGoing,
                   })}
+                  name="onGoing"
                   className="scale-[200%] mr-4 rounded-none"
                   type="checkbox"
                 />
-                <label>On goining</label>{" "}
+                <label htmlFor="onGoing">On goining</label>{" "}
                 {errors?.onGoing?.type === "validate" && (
                   <p className="text-red-600 inline ml-3">
                     End date passed cannot be on going
@@ -343,10 +369,11 @@ const EmployeeAdd = () => {
 
               <div className="space-y-2">
                 <span className="font-semibold">
-                  Is this on a ful-time or part-time basis?
+                  Is this on a full-time or part-time basis?
                 </span>
                 <div>
                   <input
+                    data-testid="basisFull"
                     {...register("basis")}
                     className="scale-150 mr-2"
                     name="basis"
@@ -355,17 +382,18 @@ const EmployeeAdd = () => {
                     defaultChecked
                   />
 
-                  <label>Full-time</label>
+                  <label htmlFor="basis">Full-time</label>
                 </div>
                 <div>
                   <input
+                    data-testid="basisPart"
                     {...register("basis")}
                     className="scale-150 mr-2"
                     name="basis"
                     type="radio"
                     value="Part-time"
                   />
-                  <label>Part-time</label>
+                  <label htmlFor="basis">Part-time</label>
                 </div>
               </div>
               <div className="flex flex-col space-y-2">
@@ -373,6 +401,7 @@ const EmployeeAdd = () => {
                   Hours per week
                 </label>
                 <input
+                  data-testid="hoursPerWeek"
                   {...register("hoursPerWeek", {
                     required: true,
                     min: 0,
@@ -387,7 +416,7 @@ const EmployeeAdd = () => {
               </div>
             </section>
 
-            <button className="text-white border-2 border-blue-700 bg-blue-700 hover:bg-blue-600 px-16 py-2 md:mr-4 rounded-md">
+            <button className="text-white border-2 border-blue-700 bg-blue-700 hover:bg-blue-600 px-16 py-[6.5px] md:mr-4 rounded-md">
               Save
             </button>
             <button>
