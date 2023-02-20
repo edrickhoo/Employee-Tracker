@@ -81,10 +81,7 @@ const EmployeeEdit = () => {
         <div className="max-w-[1280px] mx-auto px-4 py-8">
           <form
             className="space-y-8 flex flex-col items-center md:block"
-            onSubmit={(e) => {
-              e.preventDefault();
-              // handleSubmit(onSubmit)(e);
-            }}
+            onSubmit={handleSubmit(onSubmit)}
           >
             <section className="flex flex-col space-y-2">
               <h5 className="font-bold text-2xl">Personal information</h5>

@@ -1,10 +1,7 @@
-import { act, render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
+import { render, screen } from "@testing-library/react";
 import { vi } from "vitest";
-import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
-import { EmployeeApiData } from "../../interfaces/interfaces";
 import EmployeeAdd from "./EmployeeAdd";
 import axios from "axios";
 
@@ -48,19 +45,6 @@ describe("EmployeeAdd Component Tests", () => {
     ).toBeInTheDocument();
     expect(screen.getByText(/Hours per week/i)).toBeInTheDocument();
   });
-
-  //   it("should render employee data passed into component", async () => {
-  //     const removeFunction = vi.fn((value) => true);
-  //     render(
-  //       <BrowserRouter>
-  //         <EmployeeCard removeEmployee={removeFunction} employee={mockEmployee} />
-  //       </BrowserRouter>
-  //     );
-  //     expect(screen.getByText("test@hotmail.com")).toBeInTheDocument();
-  //     expect(screen.getByText(/waterr/i)).toBeInTheDocument();
-  //     expect(screen.getByText(/Contract/i)).toBeInTheDocument();
-  //     expect(screen.getByText("Edit")).toBeInTheDocument();
-  //   });
 
   it("should have required fields errors when no values are in and form is submitted", async () => {
     render(

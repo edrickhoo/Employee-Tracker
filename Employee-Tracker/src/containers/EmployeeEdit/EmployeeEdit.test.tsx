@@ -1,11 +1,9 @@
-import { act, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { vi } from "vitest";
 import { BrowserRouter, MemoryRouter, Route, Routes } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
-
 import EmployeeEdit from "./EmployeeEdit";
-
 import { createMemoryHistory } from "history";
 import axios, { AxiosResponse } from "axios";
 import * as api from "../../api/api";

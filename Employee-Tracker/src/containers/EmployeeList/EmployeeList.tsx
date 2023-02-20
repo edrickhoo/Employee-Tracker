@@ -45,7 +45,8 @@ const EmployeeList = () => {
             Add <span className="hidden md:inline">Employee</span>
           </Link>
         </div>
-        {isLoading ?? <div>Loading...</div>}
+
+        {isLoading && <div>Loading...</div>}
         {error instanceof Error && (
           <div>An error has occurred: {error.message}</div>
         )}

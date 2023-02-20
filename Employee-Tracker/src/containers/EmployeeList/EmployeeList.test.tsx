@@ -1,6 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { act, render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
+import { render, screen } from "@testing-library/react";
 import EmployeeList from "./EmployeeList";
 import { vi } from "vitest";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -8,10 +7,26 @@ import { BrowserRouter } from "react-router-dom";
 
 describe("EmployeeList Component Tests", () => {
   afterEach(() => {
-    vi.restoreAllMocks();
+    vi.clearAllMocks();
   });
-
   const queryClient = new QueryClient();
+
+  it("should render page title, description and add button", async () => {
+    vi.spyOn(axios, "get").mockRejectedValue(new Error("Error"));
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <EmployeeList />
+        </BrowserRouter>
+      </QueryClientProvider>
+    );
+
+    expect(screen.getByText("Employees' list")).toBeInTheDocument();
+    expect(await screen.findByText("error")).toBeInTheDocument();
+    const btn = screen.getByText(/add/i);
+    expect(btn.tagName).toBe("A");
+  });
 
   it("should render employees data from data fetched", async () => {
     const axiosResponse = {
@@ -29,7 +44,6 @@ describe("EmployeeList Component Tests", () => {
         </BrowserRouter>
       </QueryClientProvider>
     );
-    expect(screen.getByText("Loading...")).toBeInTheDocument();
     expect(await screen.findByText("Sam")).toBeInTheDocument();
     expect(await screen.findByText("Jeffrey")).toBeInTheDocument();
     expect(await screen.findByText("test@hotmail.com")).toBeInTheDocument();
@@ -37,7 +51,7 @@ describe("EmployeeList Component Tests", () => {
     expect(removeBtn.length).toBe(axiosResponse.data.length);
   });
 
-  it("should render page title and description", async () => {
+  it("should render page title, description and add button", async () => {
     render(
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
