@@ -7,10 +7,12 @@ import {
   canBeOnGoingHelper,
   isValidEndDateHelper,
 } from "../../helper/validationHelper/validationHelper";
+import { useState } from "react";
 
 const EmployeeEdit = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [error, setError] = useState("");
   const {
     register,
     handleSubmit,
@@ -26,7 +28,9 @@ const EmployeeEdit = () => {
       await updateEmployee(data, Number(id));
       navigate("/");
     } catch (e) {
-      console.log(e);
+      if (e instanceof Error) {
+        setError(e.message);
+      }
     }
   };
 
@@ -433,6 +437,11 @@ const EmployeeEdit = () => {
                 Cancel
               </Link>
             </button>
+            {error && (
+              <div className="text-red-600 text-lg">
+                An error has occurred: {error}
+              </div>
+            )}
           </form>
         </div>
       </div>

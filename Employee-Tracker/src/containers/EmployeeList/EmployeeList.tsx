@@ -24,12 +24,6 @@ const EmployeeList = () => {
     },
   });
 
-  if (isLoading) return <div>Loading...</div>;
-
-  if (error instanceof Error) {
-    return <div>An error has occurred: {error.message}</div>;
-  }
-
   const handleRemoveClick = (id: number) => {
     removeEmployeeMutation.mutate(id);
   };
@@ -51,6 +45,10 @@ const EmployeeList = () => {
             Add <span className="hidden md:inline">Employee</span>
           </Link>
         </div>
+        {isLoading ?? <div>Loading...</div>}
+        {error instanceof Error && (
+          <div>An error has occurred: {error.message}</div>
+        )}
         {data
           ? data.map((employee) => (
               <EmployeeCard

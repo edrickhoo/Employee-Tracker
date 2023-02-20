@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { addEmployee } from "../../api/api";
@@ -8,6 +9,7 @@ import {
 import { FormInput } from "../../interfaces/interfaces";
 
 const EmployeeAdd = () => {
+  const [error, setError] = useState("");
   const {
     register,
     handleSubmit,
@@ -23,7 +25,9 @@ const EmployeeAdd = () => {
       await addEmployee(data);
       navigate("/");
     } catch (e) {
-      console.log(e);
+      if (e instanceof Error) {
+        setError(e.message);
+      }
     }
   };
 
@@ -427,6 +431,11 @@ const EmployeeAdd = () => {
                 Cancel
               </Link>
             </button>
+            {error && (
+              <div className="text-red-600 text-lg">
+                An error has occurred: {error}
+              </div>
+            )}
           </form>
         </div>
       </div>
