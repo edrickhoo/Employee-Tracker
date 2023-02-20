@@ -52,11 +52,10 @@ describe("EmployeeAdd Component Tests", () => {
         <EmployeeAdd />
       </BrowserRouter>
     );
-
     const submitBtn = screen.getByText("Save");
-
-    await userEvent.click(submitBtn);
     screen.logTestingPlaygroundURL();
+    await userEvent.click(submitBtn);
+
     expect(screen.queryAllByText(/This field is required/i).length).toBe(6);
     expect(screen.queryAllByText(/Field required/i).length).toBe(4);
   });
