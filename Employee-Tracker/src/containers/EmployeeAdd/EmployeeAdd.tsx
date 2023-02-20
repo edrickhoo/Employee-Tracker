@@ -12,7 +12,6 @@ const EmployeeAdd = () => {
   const {
     register,
     handleSubmit,
-    watch,
     getValues,
     formState: { errors },
   } = useForm<FormInput>();

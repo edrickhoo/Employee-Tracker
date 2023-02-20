@@ -7,7 +7,7 @@ import {
   canBeOnGoingHelper,
   isValidEndDateHelper,
 } from "../../helper/validationHelper/validationHelper";
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import PersonalInfo from "../../components/PersonalInfo/PersonalInfo";
 import ContactDetails from "../../components/ContactDetails/ContactDetails";
 import EmployeeStatus from "../../components/EmployeeStatus/EmployeeStatus";
@@ -20,22 +20,11 @@ const EmployeeEdit = () => {
   const {
     register,
     handleSubmit,
-    watch,
     getValues,
-    reset,
     formState: { errors },
   } = useForm({
     defaultValues: async () => await fetchEmployeeById(Number(id)),
   });
-
-  const resetAsyncForm = useCallback(async () => {
-    const result = await fetchEmployeeById(Number(id)); // result: { firstName: 'test', lastName: 'test2' }
-    reset(result); // asynchronously reset your form values
-  }, [reset]);
-
-  useEffect(() => {
-    resetAsyncForm();
-  }, [resetAsyncForm]);
 
   const onSubmit = async (data: FormInput) => {
     try {
