@@ -5,6 +5,11 @@ import {
   isValidEndDateHelper,
 } from "./validationHelper";
 
+const date = new Date();
+const currDay = date.getDate();
+const currMonth = date.toLocaleString("default", { month: "long" });
+const currYear = date.getFullYear();
+
 describe("convMonthToNum Function Tests", () => {
   it("Should give correct number when a valid month is passed", async () => {
     expect(convMonthToNum("January")).toBe(1);
@@ -28,10 +33,6 @@ describe("convMonthToNum Function Tests", () => {
 });
 
 describe("canBeOnGoingHelper Function Tests", () => {
-  const date = new Date();
-  const currDay = date.getDate();
-  const currMonth = date.toLocaleString("default", { month: "long" });
-  const currYear = date.getFullYear();
   it("Should return true when a future date is passed compared to today's date", async () => {
     expect(
       canBeOnGoingHelper({
@@ -82,37 +83,24 @@ describe("canBeOnGoingHelper Function Tests", () => {
 });
 
 describe("isValidEndDateHelper Function Tests", () => {
-  const date = new Date();
-  const currDay = date.getDate();
-  const currMonth = date.toLocaleString("default", { month: "long" });
-  const currYear = date.getFullYear();
   it("Should return true when end date is later or same as start date", async () => {
     expect(isValidEndDateHelper(16, "January", 2019, 16, "January", 2019)).toBe(
+      true
+    );
+    expect(isValidEndDateHelper(16, "January", 2019, 16, "March", 2024)).toBe(
       true
     );
   });
 
   it("Should return false when present or previous date is passed", async () => {
-    expect(
-      canBeOnGoingHelper({
-        endDateDay: currDay,
-        endDateMonth: currMonth,
-        endDateYear: currYear,
-      })
-    ).toBe(false);
-    expect(
-      canBeOnGoingHelper({
-        endDateDay: currDay,
-        endDateMonth: currMonth,
-        endDateYear: currYear - 1,
-      })
-    ).toBe(false);
-    expect(
-      canBeOnGoingHelper({
-        endDateDay: currDay - 1,
-        endDateMonth: currMonth,
-        endDateYear: currYear,
-      })
-    ).toBe(false);
+    expect(isValidEndDateHelper(16, "January", 2019, 15, "January", 2019)).toBe(
+      false
+    );
+    expect(isValidEndDateHelper(6, "March", 2019, 16, "January", 2019)).toBe(
+      false
+    );
+    expect(isValidEndDateHelper(18, "March", 2023, 7, "January", 2020)).toBe(
+      false
+    );
   });
 });

@@ -49,7 +49,7 @@ describe("EmployeeEdit Component Tests", () => {
     expect(screen.getByText(/Hours per week/i)).toBeInTheDocument();
   });
 
-  // Axois error when clicking submit button dunno why
+  // Axois error when clicking submit button dunno why, also default values are not being fetched with react form hook
   it("should have required fields errors when no values are in and form is submitted", async () => {
     const mockData = {
       id: 1,
@@ -84,8 +84,6 @@ describe("EmployeeEdit Component Tests", () => {
     const { rerender } = render(component);
     rerender(component);
     const submitBtn = screen.getByText("Update");
-    const firstNameInput = screen.getByTestId("firstName");
-    console.log(firstNameInput);
 
     // await userEvent.click(submitBtn);
     screen.logTestingPlaygroundURL();

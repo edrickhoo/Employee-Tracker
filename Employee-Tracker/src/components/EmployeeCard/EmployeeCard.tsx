@@ -36,10 +36,6 @@ const EmployeeCard = ({ employee, removeEmployee }: Props) => {
     return total;
   };
 
-  console.log(
-    convMonthToNum(employee.endDateMonth) -
-      convMonthToNum(employee.startDateMonth)
-  );
   return (
     <div className="flex justify-between py-4 border-b boder-gray-400">
       <div>

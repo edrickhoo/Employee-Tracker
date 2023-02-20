@@ -9,7 +9,6 @@ const EmployeeList = () => {
   const { isLoading, error, data } = useQuery("employeesData", () =>
     fetchEmployees()
   );
-  console.log(data ? data[0] : null);
 
   const removeEmployeeMutation = useMutation(removeEmployeeById, {
     onSuccess: (data, id) => {
@@ -17,7 +16,6 @@ const EmployeeList = () => {
         "employeesData",
         (oldData) =>
           oldData?.filter((todo: EmployeeApiData) => {
-            console.log(id);
             return todo.id !== id;
           })
       );

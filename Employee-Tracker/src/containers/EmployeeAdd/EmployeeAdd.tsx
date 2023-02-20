@@ -24,7 +24,6 @@ const EmployeeAdd = () => {
       navigate("/");
     } catch (e) {
       if (e instanceof Error) {
-        console.log(e);
         setError(e.message);
       }
     }

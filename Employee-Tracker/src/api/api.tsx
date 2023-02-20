@@ -20,7 +20,6 @@ export const addEmployee = async (data: FormInput) => {
 
 export const fetchEmployeeById = async (id: number) => {
   const data = await axios.get(BASE_URL + id);
-  console.log(data.data);
   return data.data;
 };
 
