@@ -68,7 +68,7 @@ public class EmployeeController {
 				return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 			}
 			logger.info("Get by id request was successful");
-			return new ResponseEntity<>(maybeEmployee.get(), HttpStatus.FOUND);
+			return new ResponseEntity<>(maybeEmployee.get(), HttpStatus.OK);
 		}  catch (Exception e) {
 			logger.error("Internal Server Error occurred: " + id + ", message: " + e.getMessage(), e);
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

@@ -53,7 +53,6 @@ describe("EmployeeAdd Component Tests", () => {
       </BrowserRouter>
     );
     const submitBtn = screen.getByText("Save");
-    screen.logTestingPlaygroundURL();
     await userEvent.click(submitBtn);
 
     expect(screen.queryAllByText(/This field is required/i).length).toBe(6);
@@ -73,8 +72,9 @@ describe("EmployeeAdd Component Tests", () => {
     await userEvent.type(startYearInput, "2019");
     await userEvent.type(endYearInput, "2018");
     await userEvent.click(submitBtn);
+    screen.logTestingPlaygroundURL();
     expect(
-      screen.getByText(/End Day cannot be earlier than start date/i)
+      screen.getByText(/End date cannot be earlier than start date/i)
     ).toBeInTheDocument();
   });
 

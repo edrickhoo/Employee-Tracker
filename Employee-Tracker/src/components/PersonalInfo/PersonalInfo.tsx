@@ -46,6 +46,7 @@ const PersonalInfo = ({ register, errors }: Props) => {
         data-testid="lastName"
         {...register("lastName", {
           required: true,
+          pattern: /^[A-Za-z]+$/i,
         })}
         name="lastName"
         className="border-gray-500 border-2 rounded w-[300px] px-2 py-1"

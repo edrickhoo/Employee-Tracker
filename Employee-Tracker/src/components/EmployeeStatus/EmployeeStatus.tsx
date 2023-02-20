@@ -83,10 +83,11 @@ const EmployeeStatus = ({ isCreating, register, errors, getValues }: Props) => {
             data-testid="startDateDay"
             {...register("startDateDay", {
               required: true,
-              max: 32,
+              max: 31,
+              min: 1,
             })}
             className="border-gray-500 border-2 rounded px-2 py-1"
-            type="text"
+            type="number"
           />
           {errors?.startDateDay?.type === "required" && (
             <p className="text-red-600">Field required</p>
@@ -127,13 +128,17 @@ const EmployeeStatus = ({ isCreating, register, errors, getValues }: Props) => {
               min: 0,
             })}
             className="border-gray-500 border-2 rounded px-2 py-1"
-            type="text"
+            type="number"
           />
           {errors?.startDateYear?.type === "required" && (
             <p className="text-red-600">Field required</p>
           )}
         </div>
       </div>
+      {(errors?.startDateDay?.type === "max" ||
+        errors?.startDateDay?.type === "min") && (
+        <p className="text-red-600">Please input start day between 1-31</p>
+      )}
       <div className="font-semibold">End date</div>
       <div className="flex space-x-4">
         <div className="flex flex-col max-w-[70px]">
@@ -144,11 +149,12 @@ const EmployeeStatus = ({ isCreating, register, errors, getValues }: Props) => {
             data-testid="endDateDay"
             {...register("endDateDay", {
               required: true,
-              max: 32,
+              min: 1,
+              max: 31,
             })}
             className="border-gray-500 border-2 rounded px-2 py-1"
             name="endDateDay"
-            type="text"
+            type="number"
           />
           {errors?.endDateDay?.type === "required" && (
             <p className="text-red-600">Field required</p>
@@ -163,7 +169,7 @@ const EmployeeStatus = ({ isCreating, register, errors, getValues }: Props) => {
             {...register("endDateMonth", {
               required: true,
             })}
-            className="border-gray-500 border-2 rounded px-2 py-1"
+            className="border-gray-500 border-2 rounded px-2 py-1 h-[36px]"
             name="endDateMonth"
             id="endDateMonth"
           >
@@ -181,6 +187,7 @@ const EmployeeStatus = ({ isCreating, register, errors, getValues }: Props) => {
             <option value="December">December</option>
           </select>
         </div>
+
         <div className="flex flex-col max-w-[70px]">
           <label className="font-semibold" htmlFor="endDateYear">
             Year
@@ -193,7 +200,7 @@ const EmployeeStatus = ({ isCreating, register, errors, getValues }: Props) => {
             })}
             className="border-gray-500 border-2 rounded px-2 py-1"
             name="endDateYear"
-            type="text"
+            type="number"
           />
           {errors?.endDateYear?.type === "required" && (
             <p className="text-red-600">Field required</p>
@@ -208,8 +215,12 @@ const EmployeeStatus = ({ isCreating, register, errors, getValues }: Props) => {
       </div>
       {errors?.endDateYear?.type === "validate" && (
         <p className="text-red-600">
-          End Day cannot be earlier than start date
+          End date cannot be earlier than start date
         </p>
+      )}
+      {(errors?.endDateDay?.type === "max" ||
+        errors?.endDateDay?.type === "min") && (
+        <p className="text-red-600">Please input end day between 1-31</p>
       )}
       <div className="pl-2 pb-4 py-2 ">
         <input
@@ -223,7 +234,7 @@ const EmployeeStatus = ({ isCreating, register, errors, getValues }: Props) => {
         />
         <label htmlFor="onGoing">On goining</label>{" "}
         {errors?.onGoing?.type === "validate" && (
-          <p className="text-red-600 inline ml-3">
+          <p className="text-red-600 mt-2 md:mt-0 md:inline md:ml-3">
             End date passed cannot be on going
           </p>
         )}
@@ -270,10 +281,12 @@ const EmployeeStatus = ({ isCreating, register, errors, getValues }: Props) => {
           })}
           className="border-gray-500 border-2 rounded px-2 py-1 max-w-[70px]"
           name="hoursPerWeek"
-          type="text"
+          type="number"
         />
         {errors?.hoursPerWeek?.type === "required" && (
-          <p className="text-red-600">This field is required</p>
+          <p className="text-red-600 text-center md:text-left">
+            This field is required
+          </p>
         )}
       </div>
     </section>

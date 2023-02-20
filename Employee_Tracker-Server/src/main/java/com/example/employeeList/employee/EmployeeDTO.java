@@ -26,24 +26,24 @@ public class EmployeeDTO {
 	@NotBlank
 	private String contract;
 
-	@NotBlank
+	@NotNull
 	@Max(31)
 	private Integer startDateDay;
 	
 	@NotBlank
 	private String startDateMonth;
-	
-	@NotBlank
+
+	@NotNull
 	private Integer startDateYear;
-	
-	@NotBlank
+
+	@NotNull
 	@Max(31)
 	private Integer endDateDay;
 
 	@NotBlank
 	private String endDateMonth;
-	
-	@NotBlank
+
+	@NotNull
 	private Integer endDateYear;
 	
 	@NotNull

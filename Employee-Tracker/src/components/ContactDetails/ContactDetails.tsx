@@ -12,6 +12,7 @@ const ContactDetails = ({ register, errors }: Props) => {
       <h5 className="font-bold text-2xl">Contact details</h5>
       <label>Email address</label>
       <input
+        placeholder="test@example.com"
         data-testid="email"
         {...register("email", {
           required: true,
@@ -23,6 +24,9 @@ const ContactDetails = ({ register, errors }: Props) => {
       />
       {errors?.email?.type === "required" && (
         <p className="text-red-600">This field is required</p>
+      )}
+      {errors?.email?.type === "pattern" && (
+        <p className="text-red-600">Please follow test@example.com</p>
       )}
       <div>
         <label htmlFor="phone">Mobile number</label>
@@ -36,9 +40,12 @@ const ContactDetails = ({ register, errors }: Props) => {
           +61
         </span>
         <input
+          placeholder="0412345678"
           data-testid="phone"
           {...register("phone", {
             required: true,
+            validate: (val) => val.length <= 10,
+            pattern: /(?:\(0\)[23478]|\(?0?[23478]\)?)\d{8}/,
           })}
           name="phone"
           className="pl-14 focus:outline-none w-full px-2 py-1"
@@ -48,6 +55,12 @@ const ContactDetails = ({ register, errors }: Props) => {
       {errors?.phone?.type === "required" && (
         <p className="text-red-600">This field is required</p>
       )}
+      {errors?.phone?.type === "pattern" && (
+        <p className="text-red-600">Please enter valid number e.g 0412345678</p>
+      )}
+      {errors?.phone?.type === "validate" && (
+        <p className="text-red-600">Exceeding maximun digits of 10</p>
+      )}
 
       <div>
         <label htmlFor="address">Residential address</label>
@@ -55,6 +68,7 @@ const ContactDetails = ({ register, errors }: Props) => {
       </div>
 
       <input
+        placeholder="123 Example St, Sydney NSW 2000"
         data-testid="address"
         {...register("address", {
           required: true,

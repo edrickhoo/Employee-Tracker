@@ -88,7 +88,6 @@ describe("EmployeeEdit Component Tests", () => {
     console.log(firstNameInput);
 
     // await userEvent.click(submitBtn);
-    // await fireEvent.submit(submitBtn);
     screen.logTestingPlaygroundURL();
     await expect(screen.queryAllByText(/This field is required/i).length).toBe(
       6

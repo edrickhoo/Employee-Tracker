@@ -24,6 +24,7 @@ const EmployeeAdd = () => {
       navigate("/");
     } catch (e) {
       if (e instanceof Error) {
+        console.log(e);
         setError(e.message);
       }
     }
@@ -68,7 +69,7 @@ const EmployeeAdd = () => {
               </Link>
             </button>
             {error && (
-              <div className="text-red-600 text-lg">
+              <div className="text-red-600 text-lg text-center md:text-left">
                 An error has occurred: {error}
               </div>
             )}
