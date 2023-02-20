@@ -49,30 +49,16 @@ describe("EmployeeAdd Component Tests", () => {
     expect(screen.getByText(/Hours per week/i)).toBeInTheDocument();
   });
 
-  //   it("should render employee data passed into component", async () => {
-  //     const removeFunction = vi.fn((value) => true);
-  //     render(
-  //       <BrowserRouter>
-  //         <EmployeeCard removeEmployee={removeFunction} employee={mockEmployee} />
-  //       </BrowserRouter>
-  //     );
-  //     expect(screen.getByText("test@hotmail.com")).toBeInTheDocument();
-  //     expect(screen.getByText(/waterr/i)).toBeInTheDocument();
-  //     expect(screen.getByText(/Contract/i)).toBeInTheDocument();
-  //     expect(screen.getByText("Edit")).toBeInTheDocument();
-  //   });
-
   it("should have required fields errors when no values are in and form is submitted", async () => {
     render(
       <BrowserRouter>
         <EmployeeAdd />
       </BrowserRouter>
     );
-
     const submitBtn = screen.getByText("Save");
-
-    await userEvent.click(submitBtn);
     screen.logTestingPlaygroundURL();
+    await userEvent.click(submitBtn);
+
     expect(screen.queryAllByText(/This field is required/i).length).toBe(6);
     expect(screen.queryAllByText(/Field required/i).length).toBe(4);
   });
