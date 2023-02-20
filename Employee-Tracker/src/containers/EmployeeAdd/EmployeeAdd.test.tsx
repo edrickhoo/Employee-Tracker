@@ -72,7 +72,7 @@ describe("EmployeeAdd Component Tests", () => {
     await userEvent.type(startYearInput, "2019");
     await userEvent.type(endYearInput, "2018");
     await userEvent.click(submitBtn);
-    screen.logTestingPlaygroundURL();
+
     expect(
       screen.getByText(/End date cannot be earlier than start date/i)
     ).toBeInTheDocument();

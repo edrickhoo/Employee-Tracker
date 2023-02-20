@@ -3,10 +3,6 @@ import { Link } from "react-router-dom";
 import { fetchEmployeeById, updateEmployee } from "../../api/api";
 import { useParams, useNavigate } from "react-router-dom";
 import { FormInput } from "../../interfaces/interfaces";
-import {
-  canBeOnGoingHelper,
-  isValidEndDateHelper,
-} from "../../helper/validationHelper/validationHelper";
 import { useState } from "react";
 import PersonalInfo from "../../components/PersonalInfo/PersonalInfo";
 import ContactDetails from "../../components/ContactDetails/ContactDetails";
@@ -35,35 +31,6 @@ const EmployeeEdit = () => {
         setError(e.message);
       }
     }
-  };
-
-  const isValidEndDate = () => {
-    const startDay = getValues().startDateDay;
-    const startMonth = getValues().startDateMonth;
-    const startYear = getValues().startDateYear;
-    const endDay = getValues().endDateDay;
-    const endMonth = getValues().endDateMonth;
-    const endYear = getValues().endDateYear;
-
-    return isValidEndDateHelper(
-      startDay,
-      startMonth,
-      startYear,
-      endDay,
-      endMonth,
-      endYear
-    );
-  };
-
-  const canBeOnGoing = (value: boolean): boolean => {
-    if (value === false) {
-      return true;
-    }
-    const endDateDay = getValues().endDateDay;
-    const endDateMonth = getValues().endDateMonth;
-    const endDateYear = getValues().endDateYear;
-
-    return canBeOnGoingHelper({ endDateDay, endDateMonth, endDateYear });
   };
 
   return (
