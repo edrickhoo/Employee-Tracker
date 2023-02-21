@@ -10,7 +10,7 @@ interface Props {
 const EmployeeCard = ({ employee, removeEmployee }: Props) => {
   return (
     <div className="flex justify-between py-4 border-b boder-gray-400">
-      <div>
+      <div className="max-w-[220px] md:max-w-[800px]">
         <p className="font-semibold">
           {employee.firstName} {employee.middleName} {employee.lastName}
         </p>

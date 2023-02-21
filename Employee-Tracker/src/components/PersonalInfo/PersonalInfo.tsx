@@ -34,7 +34,7 @@ const PersonalInfo = ({ register, errors }: Props) => {
         {...register("middleName", {
           pattern: /^[A-Za-z]+$/i,
         })}
-        name="middle-name"
+        name="middleName"
         className="border-gray-500 border-2 rounded w-[300px] px-2 py-1"
         type="text"
       />
