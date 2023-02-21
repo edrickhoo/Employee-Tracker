@@ -3,13 +3,12 @@ package com.example.employeeList.employee;
 import java.util.List;
 import java.util.Optional;
 
-
-
 import javax.validation.Valid;
 
-
+import com.example.employeeList.employee.exception.BadRequestException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +37,9 @@ public class EmployeeController {
 			Employee createdEmployee = this.service.create(data);
 			logger.info("Create request was successful");
 			return new ResponseEntity<>(createdEmployee, HttpStatus.CREATED);
+		} catch (BadRequestException e) {
+			logger.error("BadRequest occurred, message: " + e.getMessage(), e);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		} catch (Exception e) {
 			logger.error("Internal Server Error occurred, message: " + e.getMessage(), e);
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -51,7 +53,7 @@ public class EmployeeController {
 			List<Employee> allEmployees = this.service.getAll();
 			logger.info("GetAll request was successful");
 			return new ResponseEntity<>(allEmployees, HttpStatus.OK);
-		} catch (Exception e) {
+		}  catch (Exception e) {
 			logger.error("Internal Server Error occurred, message: " + e.getMessage(), e);
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -60,7 +62,6 @@ public class EmployeeController {
 	@CrossOrigin
 	@GetMapping("/{id}")
 	public ResponseEntity<Employee> getById(@PathVariable Long id){
-
 		try {
 			Optional<Employee> maybeEmployee = this.service.getById(id);
 			if(maybeEmployee.isEmpty()) {
@@ -73,7 +74,6 @@ public class EmployeeController {
 			logger.error("Internal Server Error occurred: " + id + ", message: " + e.getMessage(), e);
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-
 	}
 	
 	@CrossOrigin
@@ -86,11 +86,13 @@ public class EmployeeController {
 				logger.info("Update request was successful no existing id found, new entry was created");
 				return new ResponseEntity<>(createdEmployee, HttpStatus.CREATED);
 			}
-
 			Employee updatedEmployee = this.service.update(data, id);
 			logger.info("Update request was successful existing entry was updated");
 			return new ResponseEntity<>(updatedEmployee, HttpStatus.ACCEPTED);
-		} catch (Exception e) {
+		}  catch (BadRequestException e) {
+			logger.error("BadRequest occurred, message: " + e.getMessage(), e);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}  catch (Exception e) {
 			logger.error("Internal Server Error occurred: " + id + ", message: " + e.getMessage(), e);
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -112,6 +114,4 @@ public class EmployeeController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-
 }

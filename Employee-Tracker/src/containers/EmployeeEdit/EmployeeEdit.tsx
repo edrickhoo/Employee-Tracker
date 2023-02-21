@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { fetchEmployeeById, updateEmployee } from "../../api/api";
+import { fetchEmployeeById, updateEmployee } from "../../api/employees";
 import { useParams, useNavigate } from "react-router-dom";
 import { FormInput } from "../../interfaces/interfaces";
 import { useState } from "react";

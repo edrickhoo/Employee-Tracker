@@ -1,6 +1,5 @@
 package com.example.employeeList.employee;
 
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,7 +16,6 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-
 @ExtendWith(MockitoExtension.class)
 class EmployeeServiceTest {
 
@@ -33,7 +31,7 @@ class EmployeeServiceTest {
     @Test
     void create() {
         // given
-        EmployeeDTO employeeDTO = new EmployeeDTO(  "Frank", "bob", "test", "test@hotmail.com", "test", "test", "test", 15, "test", 2015, 15, "test", 2016, true, "test", 33
+        EmployeeDTO employeeDTO = new EmployeeDTO(  "Frank", "bob", "test", "test@hotmail.com", "0412345678", "5 John St", "Permanent", 15, "March", 2015, 15, "April", 2016, false, "test", 33
         );
 
         // when

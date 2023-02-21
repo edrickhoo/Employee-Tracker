@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import { addEmployee } from "../../api/api";
+import { addEmployee } from "../../api/employees";
 import ContactDetails from "../../components/ContactDetails/ContactDetails";
 import EmployeeStatus from "../../components/EmployeeStatus/EmployeeStatus";
 import PersonalInfo from "../../components/PersonalInfo/PersonalInfo";

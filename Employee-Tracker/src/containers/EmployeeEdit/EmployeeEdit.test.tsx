@@ -6,7 +6,7 @@ import userEvent from "@testing-library/user-event";
 import EmployeeEdit from "./EmployeeEdit";
 import { createMemoryHistory } from "history";
 import axios, { AxiosResponse } from "axios";
-import * as api from "../../api/api";
+import * as api from "../../api/employees";
 
 describe("EmployeeEdit Component Tests", () => {
   it("should render title of page", async () => {
@@ -60,15 +60,15 @@ describe("EmployeeEdit Component Tests", () => {
       phone: "0412345678",
       address: "5 John St, Peter, 2588 Sydney",
       contract: "Permanent",
-      startDateDay: "18",
+      startDateDay: 18,
       startDateMonth: "January",
-      startDateYear: "2019",
-      endDateDay: "3",
+      startDateYear: 2019,
+      endDateDay: 3,
       endDateMonth: "January",
-      endDateYear: "2024",
+      endDateYear: 2024,
       onGoing: false,
       basis: "Full-time",
-      hoursPerWeek: "44",
+      hoursPerWeek: 44,
     };
 
     vi.spyOn(api, "fetchEmployeeById").mockResolvedValue(mockData);

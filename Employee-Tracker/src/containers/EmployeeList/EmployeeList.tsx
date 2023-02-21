@@ -1,6 +1,6 @@
 import EmployeeCard from "../../components/EmployeeCard/EmployeeCard";
 import { Link } from "react-router-dom";
-import { fetchEmployees, removeEmployeeById } from "../../api/api";
+import { fetchEmployees, removeEmployeeById } from "../../api/employees";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { EmployeeApiData } from "../../interfaces/interfaces";
 
