@@ -35,7 +35,6 @@ const EmployeeEdit = () => {
 
   return (
     <div>
-      <div>{id}</div>
       <div>
         <div className="bg-gray-200 py-16 flex flex-col items-center md:block">
           <Link

@@ -6,6 +6,9 @@ import EmployeeAdd from "./EmployeeAdd";
 import axios from "axios";
 
 describe("EmployeeAdd Component Tests", () => {
+  afterEach(() => {
+    vi.resetAllMocks();
+  });
   it("should render title of page", async () => {
     render(
       <BrowserRouter>
