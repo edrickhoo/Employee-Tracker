@@ -92,7 +92,7 @@ describe("isValidEndDateHelper Function Tests", () => {
     );
   });
 
-  it("Should return false when present or previous date is passed", async () => {
+  it("Should return false when start date is later than end date", async () => {
     expect(isValidEndDateHelper(16, "January", 2019, 15, "January", 2019)).toBe(
       false
     );

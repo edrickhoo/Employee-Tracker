@@ -63,7 +63,7 @@ describe("EmployeeEdit Component Tests", () => {
   //     phone: "0412345678",
   //     address: "5 John St, Peter, 2588 Sydney",
   //     contract: "Permanent",
-  //     startDateDay: 18,
+  //     startDateDay: 55,
   //     startDateMonth: "January",
   //     startDateYear: 2019,
   //     endDateDay: 3,
@@ -83,7 +83,7 @@ describe("EmployeeEdit Component Tests", () => {
   //     </MemoryRouter>
   //   );
   //   const history = createMemoryHistory();
-  //   history.push("/users/123");
+  //   history.push("/employees/1");
   //   const { rerender } = render(component);
   //   rerender(component);
   //   const submitBtn = screen.getByText("Update");

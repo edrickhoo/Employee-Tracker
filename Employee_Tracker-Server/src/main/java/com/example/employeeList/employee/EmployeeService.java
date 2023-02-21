@@ -6,7 +6,7 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import com.example.employeeList.employee.exception.BadRequestException;
-import com.example.employeeList.employee.validation.validation;
+import com.example.employeeList.employee.validation.Validation;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ public class EmployeeService {
 	private EmployeeRepository employeeRepository;
 
 	public Employee create(EmployeeDTO data) {
-		boolean dateValid = validation.isValidDate(data.getStartDateDay(), data.getStartDateMonth(), data.getStartDateYear(), data.getEndDateDay(),data.getEndDateMonth(), data.getEndDateYear());
+		boolean dateValid = Validation.isValidDate(data.getStartDateDay(), data.getStartDateMonth(), data.getStartDateYear(), data.getEndDateDay(),data.getEndDateMonth(), data.getEndDateYear());
 		if(!dateValid) {
 			throw new BadRequestException(
 					"Invalid dates please ensure end date is later than start date");
@@ -41,7 +41,7 @@ public class EmployeeService {
 	}
 
 	public Employee update(EmployeeDTO data, Long id) {
-		boolean dateValid = validation.isValidDate(data.getStartDateDay(), data.getStartDateMonth(), data.getStartDateYear(), data.getEndDateDay(),data.getEndDateMonth(), data.getEndDateYear());
+		boolean dateValid = Validation.isValidDate(data.getStartDateDay(), data.getStartDateMonth(), data.getStartDateYear(), data.getEndDateDay(),data.getEndDateMonth(), data.getEndDateYear());
 		if(!dateValid) {
 			throw new BadRequestException(
 					"Invalid dates please ensure end date is later than start date");

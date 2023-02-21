@@ -2,7 +2,7 @@ package com.example.employeeList.employee.validation;
 
 import java.time.Month;
 
-public class validation {
+public class Validation {
     public static boolean isValidDate (int startDay, String startMonth, int startYear, int endDay, String endMonth, int endYear) {
         int convStartMonth = Month.valueOf(startMonth.toUpperCase()).getValue();
         int convEndMonth = Month.valueOf(endMonth.toUpperCase()).getValue();

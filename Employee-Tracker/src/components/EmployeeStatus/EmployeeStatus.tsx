@@ -125,7 +125,7 @@ const EmployeeStatus = ({ isCreating, register, errors, getValues }: Props) => {
             data-testid="startDateYear"
             {...register("startDateYear", {
               required: true,
-              min: 0,
+              min: 1,
             })}
             className="border-gray-500 border-2 rounded px-2 py-1"
             type="number"
@@ -205,12 +205,6 @@ const EmployeeStatus = ({ isCreating, register, errors, getValues }: Props) => {
           {errors?.endDateYear?.type === "required" && (
             <p className="text-red-600">Field required</p>
           )}
-
-          {errors?.endDateYear?.type === "min" && (
-            <p className="text-red-600">
-              Must be greater than {Number(getValues().startDateYear) - 1}
-            </p>
-          )}
         </div>
       </div>
       {errors?.endDateYear?.type === "validate" && (
@@ -277,7 +271,7 @@ const EmployeeStatus = ({ isCreating, register, errors, getValues }: Props) => {
           data-testid="hoursPerWeek"
           {...register("hoursPerWeek", {
             required: true,
-            min: 0,
+            min: 1,
           })}
           className="border-gray-500 border-2 rounded px-2 py-1 max-w-[70px]"
           name="hoursPerWeek"
@@ -286,6 +280,11 @@ const EmployeeStatus = ({ isCreating, register, errors, getValues }: Props) => {
         {errors?.hoursPerWeek?.type === "required" && (
           <p className="text-red-600 text-center md:text-left">
             This field is required
+          </p>
+        )}
+        {errors?.hoursPerWeek?.type === "min" && (
+          <p className="text-red-600 text-center md:text-left">
+            Number must be greater than 0
           </p>
         )}
       </div>
