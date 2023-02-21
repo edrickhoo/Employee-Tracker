@@ -11,7 +11,7 @@ const currMonth = date.toLocaleString("default", { month: "long" });
 const currYear = date.getFullYear();
 
 describe("convMonthToNum Function Tests", () => {
-  it("Should give correct number when a valid month is passed", async () => {
+  it("should give correct number when a valid month is passed", async () => {
     expect(convMonthToNum("January")).toBe(1);
     expect(convMonthToNum("February")).toBe(2);
     expect(convMonthToNum("March")).toBe(3);
@@ -33,7 +33,7 @@ describe("convMonthToNum Function Tests", () => {
 });
 
 describe("canBeOnGoingHelper Function Tests", () => {
-  it("Should return true when a future date is passed compared to today's date", async () => {
+  it("should return true when a future date is passed compared to today's date", async () => {
     expect(
       canBeOnGoingHelper({
         endDateDay: currDay,
@@ -57,7 +57,7 @@ describe("canBeOnGoingHelper Function Tests", () => {
     ).toBe(true);
   });
 
-  it("Should return false when present or previous date is passed", async () => {
+  it("should return false when present or previous date is passed", async () => {
     expect(
       canBeOnGoingHelper({
         endDateDay: currDay,
@@ -83,7 +83,7 @@ describe("canBeOnGoingHelper Function Tests", () => {
 });
 
 describe("isValidEndDateHelper Function Tests", () => {
-  it("Should return true when end date is later or same as start date", async () => {
+  it("should return true when end date is later or same as start date", async () => {
     expect(isValidEndDateHelper(16, "January", 2019, 16, "January", 2019)).toBe(
       true
     );
@@ -92,7 +92,7 @@ describe("isValidEndDateHelper Function Tests", () => {
     );
   });
 
-  it("Should return false when start date is later than end date", async () => {
+  it("should return false when start date is later than end date", async () => {
     expect(isValidEndDateHelper(16, "January", 2019, 15, "January", 2019)).toBe(
       false
     );

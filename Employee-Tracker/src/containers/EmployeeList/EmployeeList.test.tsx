@@ -75,7 +75,7 @@ describe("EmployeeList Component Tests", () => {
     expect(btn.tagName).toBe("A");
   });
 
-  it("Should send delete axois request when a remove button is clicked ", async () => {
+  it("should send delete axois request when a remove button is clicked ", async () => {
     const axiosResponse = {
       data: [{ id: 1, firstName: "Sam", email: "test@hotmail.com" }],
     } as AxiosResponse;
@@ -90,7 +90,6 @@ describe("EmployeeList Component Tests", () => {
         </BrowserRouter>
       </QueryClientProvider>
     );
-    screen.logTestingPlaygroundURL();
     expect(await screen.findByText("Sam")).toBeInTheDocument();
     expect(await screen.findByText("test@hotmail.com")).toBeInTheDocument();
     const removeBtn = screen.queryAllByRole("button", { name: /remove/i });
