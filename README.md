@@ -4,10 +4,10 @@
 
 
 ## Demo & Snippets
-
-
--   Include hosted link
--   Include images of app if CLI or Client App
+- Desktop and Mobile view
+![Screenshot desktop employee list](./Screenshots/Employee-Tracker-desktop-thumbnail.png)
+![Screenshot desktop employee add](./Screenshots/Employee-Tracker-add-desktop-thumbnail.png)
+![Screenshot mobile employee edit](./Screenshots/Employee-Tracker-edit-mobile-thumbnail.png)
 
 
 ---
