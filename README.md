@@ -114,7 +114,7 @@ spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5InnoDBDial
   - Email validation to require @ symbol
   - Mobile validation to be less than 10 digits and only contain numbers with error cases handling both.
   - Start and End day date validations to be numbers and between 1 - 31 with error msg when validation is not met
-- When adding/updating employees and axios request fails and error message will be displayed
+- When adding/updating employees and axios request fails an error message will be displayed
 - Responsive for both desktop and mobile.
   <br />
 - Backend error handling with Optional class for Not found errors
