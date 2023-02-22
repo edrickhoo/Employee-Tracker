@@ -187,7 +187,7 @@ spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5InnoDBDial
 
 ## What did you struggle with?
 - Testing 
-  - I was not too familiar with spring testing and to research videos and docs to learn and understand more about it.
+  - I was not too familiar with spring testing and had to research videos and docs to learn and understand more about it.
   - Frontend testing with mocking with axios as I could not figure out why the employeeEdit tests were not working, after time boxing the issue I thought it was best to move on to other tests.
 ---
 
