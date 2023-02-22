@@ -197,7 +197,6 @@ describe("EmployeeAdd Component Tests", () => {
 
     await userEvent.clear(hoursPerInput);
     await userEvent.type(hoursPerInput, "-44");
-    screen.logTestingPlaygroundURL();
     expect(
       screen.getByText(/Number must be greater than 0/i)
     ).toBeInTheDocument();
