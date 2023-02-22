@@ -1,5 +1,7 @@
 # Employee-Tracker
 
+![workflow](https://github.com/edrickhoo/Employee-Tracker/actions/workflows/node.js.yml/badge.svg)
+
 ## Demo & Snippets
 - Desktop and Mobile view
 ![Screenshot desktop employee list](./Screenshots/Employee-Tracker-desktop-thumbnail.png)
