@@ -99,6 +99,162 @@ describe("EmployeeAdd Component Tests", () => {
     ).toBeInTheDocument();
   });
 
+  it("should display Alphabetic characters only error when first/middle/last inputs have non alphabetic characters on form submit", async () => {
+    render(
+      <BrowserRouter>
+        <EmployeeAdd />
+      </BrowserRouter>
+    );
+
+    const submitBtn = screen.getByText("Save");
+    const firstNameInput = screen.getByTestId("firstName");
+    const middleNameInput = screen.getByTestId("middleName");
+    const lastNameInput = screen.getByTestId("lastName");
+
+    await userEvent.type(firstNameInput, "Pizza  Pizza");
+    await userEvent.type(middleNameInput, "Peter2018");
+    await userEvent.type(lastNameInput, "Jack_");
+    await userEvent.click(submitBtn);
+    expect(screen.getAllByText(/Alphabetic characters only/i).length).toBe(3);
+  });
+
+  it("should display notify user about maxium digits of 10 when more than 10 digits are used in the phone input on form submit", async () => {
+    render(
+      <BrowserRouter>
+        <EmployeeAdd />
+      </BrowserRouter>
+    );
+
+    const submitBtn = screen.getByText("Save");
+    const phoneInput = screen.getByTestId("phone");
+
+    await userEvent.type(phoneInput, "0123456789014");
+    await userEvent.click(submitBtn);
+    expect(
+      screen.getByText(/Exceeding maximun digits of 10/i)
+    ).toBeInTheDocument();
+  });
+
+  it("should display notify user about input min-max of 1-31 when a number not in that range is input for start/end day on form submit", async () => {
+    render(
+      <BrowserRouter>
+        <EmployeeAdd />
+      </BrowserRouter>
+    );
+
+    const submitBtn = screen.getByText("Save");
+    const startDayInput = screen.getByTestId("startDateDay");
+    const endDayInput = screen.getByTestId("endDateDay");
+
+    await userEvent.type(startDayInput, "0");
+    await userEvent.type(endDayInput, "35");
+    await userEvent.click(submitBtn);
+    expect(
+      screen.getByText(/Please input start day between 1-31/i)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/Please input end day between 1-31/i)
+    ).toBeInTheDocument();
+  });
+
+  it("should display notify user about input min-max of 1-31 when a number not in that range is input for start/end day on form submit", async () => {
+    render(
+      <BrowserRouter>
+        <EmployeeAdd />
+      </BrowserRouter>
+    );
+
+    const submitBtn = screen.getByText("Save");
+    const startDayInput = screen.getByTestId("startDateDay");
+    const endDayInput = screen.getByTestId("endDateDay");
+
+    await userEvent.type(startDayInput, "0");
+    await userEvent.type(endDayInput, "35");
+    await userEvent.click(submitBtn);
+    expect(
+      screen.getByText(/Please input start day between 1-31/i)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/Please input end day between 1-31/i)
+    ).toBeInTheDocument();
+  });
+
+  it("should display notify user about input min 0 when a number less than 0 inputted for hours per week on form submit", async () => {
+    render(
+      <BrowserRouter>
+        <EmployeeAdd />
+      </BrowserRouter>
+    );
+
+    const submitBtn = screen.getByText("Save");
+    const hoursPerInput = screen.getByTestId("hoursPerWeek");
+
+    await userEvent.type(hoursPerInput, "0");
+    await userEvent.click(submitBtn);
+    expect(
+      screen.getByText(/Number must be greater than 0/i)
+    ).toBeInTheDocument();
+
+    await userEvent.clear(hoursPerInput);
+    await userEvent.type(hoursPerInput, "-44");
+    screen.logTestingPlaygroundURL();
+    expect(
+      screen.getByText(/Number must be greater than 0/i)
+    ).toBeInTheDocument();
+  });
+
+  it("should display notify user about invalid when input doesnt begin with 02/03/04/07/08 and have 8 digits the phone input on form submit", async () => {
+    render(
+      <BrowserRouter>
+        <EmployeeAdd />
+      </BrowserRouter>
+    );
+
+    const submitBtn = screen.getByText("Save");
+    const phoneInput = screen.getByTestId("phone");
+
+    await userEvent.type(phoneInput, "04123");
+    await userEvent.click(submitBtn);
+    expect(
+      screen.getByText(/Please enter valid number e.g 0412345678/i)
+    ).toBeInTheDocument();
+
+    await userEvent.clear(phoneInput);
+    await userEvent.type(phoneInput, "0012345678");
+    await userEvent.click(submitBtn);
+    expect(
+      screen.getByText(/Please enter valid number e.g 0412345678/i)
+    ).toBeInTheDocument();
+
+    await userEvent.clear(phoneInput);
+    await userEvent.type(phoneInput, "0512345678");
+    await userEvent.click(submitBtn);
+    expect(
+      screen.getByText(/Please enter valid number e.g 0412345678/i)
+    ).toBeInTheDocument();
+
+    await userEvent.clear(phoneInput);
+    await userEvent.type(phoneInput, "0112345678");
+    await userEvent.click(submitBtn);
+    expect(
+      screen.getByText(/Please enter valid number e.g 0412345678/i)
+    ).toBeInTheDocument();
+
+    await userEvent.clear(phoneInput);
+    await userEvent.type(phoneInput, "0912345678");
+    await userEvent.click(submitBtn);
+    expect(
+      screen.getByText(/Please enter valid number e.g 0412345678/i)
+    ).toBeInTheDocument();
+
+    await userEvent.clear(phoneInput);
+    await userEvent.type(phoneInput, "0612345678");
+    await userEvent.click(submitBtn);
+    expect(
+      screen.getByText(/Please enter valid number e.g 0412345678/i)
+    ).toBeInTheDocument();
+  });
+
   it("should make axois post request on successful submit", async () => {
     const mockData = {
       firstName: "water",

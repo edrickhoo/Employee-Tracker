@@ -39,7 +39,7 @@ const PersonalInfo = ({ register, errors }: Props) => {
         type="text"
       />
       {errors?.middleName?.type === "pattern" && (
-        <p className="text-red-600">Alphabetic characters only </p>
+        <p className="text-red-600">Alphabetic characters only</p>
       )}
       <label>Last name</label>
       <input
