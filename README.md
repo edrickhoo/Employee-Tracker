@@ -95,15 +95,6 @@ spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5InnoDBDial
   - Backend - Navigate to Employee-Tracker/Employee_Tracker-Server/src/test/java/com/example/employeeList/employee/
     - Run specific file to run tests
 
-- Setting up application properties - navigate to Employee-Tracker/Employee_Tracker-Server/src/main/resources/application.properties
-- Change password to your MySQL pass (This will connect the backend to database)
-```
-spring.datasource.url=jdbc:mysql://localhost:3306/employee_list
-spring.datasource.username=root
-spring.datasource.password=(Change this to your pass)
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5InnoDBDialect
-```
 
 
 ---
